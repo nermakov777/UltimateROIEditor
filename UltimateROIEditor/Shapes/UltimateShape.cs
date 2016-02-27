@@ -13,24 +13,50 @@ namespace UltimateROIEditor.Shapes
     
     public abstract class UltimateShape
     {
+        protected Guid guid;
+        public Guid Guid
+        {
+            get { return guid; }
+            set { guid = value; }
+        }
 
-        public Guid guid;
-        public static int count = 0; //количество созданных объектов
-        public int InternalID;
+        protected static int count = 0; //количество созданных объектов
+        public static int Count
+        {
+            get { return count; }
+        }
+        
+        protected int internalID;
+        public int InternalID
+        {
+            get { return internalID; }
+        }
 
         //Mouse events
         //public event MouseEventHandler MouseDown;
         //public event MouseEventHandler MouseMove;
         //public event MouseEventHandler MouseUp;
-        public bool IsMouseHover = false;
+        protected bool isMouseHover = false;
+        public bool IsMouseHover
+        {
+            get { return isMouseHover; }
+        }
         public event EventHandler Click; //Click inside shape
         public event EventHandler MouseEnter;
         public event EventHandler MouseHover;
         public event EventHandler MouseLeave;
         
         //Move events
-        public bool IsReadyToMove = false;
-        public bool IsMoved = false;
+        protected bool isReadyToMove = false;
+        public bool IsReadyToMove
+        {
+            get { return isReadyToMove; }
+        }
+        protected bool isMoved = false;
+        public bool IsMoved
+        {
+            get { return isMoved; }
+        }
         public event EventHandler MoveEnter; //put object
         public event EventHandler MoveHover;  //dragging
         public event EventHandler MoveLeave; //drop object

@@ -38,7 +38,7 @@ namespace UltimateROIEditor.Shapes
         public UltimateRectangle()
         {
             guid = Guid.NewGuid();
-            InternalID = count;
+            internalID = count;
             count++;
             
             CreateContextMenu();
@@ -53,7 +53,7 @@ namespace UltimateROIEditor.Shapes
             IsActive = false;
             mMove = false;
             nodeSelected = PosSizableRect.None;
-            IsMouseHover = false;
+            isMouseHover = false;
 
             //подписка на собственные события
             MouseEnter += new EventHandler(HandleMouseEnter); 
@@ -63,7 +63,7 @@ namespace UltimateROIEditor.Shapes
         public UltimateRectangle (Rectangle rect)
         {
             guid = Guid.NewGuid();
-            InternalID = count;
+            internalID = count;
             count++;
             
             CreateContextMenu();
@@ -80,11 +80,16 @@ namespace UltimateROIEditor.Shapes
             IsActive = false;
             mMove = false;
             nodeSelected = PosSizableRect.None;
-            IsMouseHover = false;
+            isMouseHover = false;
 
             //подписка на собственные события
             MouseEnter += new EventHandler(HandleMouseEnter);
             MouseLeave += new EventHandler(HandleMouseLeave); 
+        }
+        ~UltimateRectangle()
+        {
+            count--;
+            Debug.WriteLine("Shape destructed. Count = {0}", count.ToString());
         }
 
         protected virtual void CreateEventHandlers()
@@ -167,8 +172,8 @@ namespace UltimateROIEditor.Shapes
         {
             if (Contains(e.Location)) //нажали внутри фигуры
             {
-                IsReadyToMove = true; //приготовились двигать всю фигуру
-                IsMoved = false;
+                isReadyToMove = true; //приготовились двигать всю фигуру
+                isMoved = false;
                 OnClick(); //???
 
                 IsActive = true;
@@ -224,14 +229,14 @@ namespace UltimateROIEditor.Shapes
         private void mPictureBox_MouseUp(object sender, MouseEventArgs e)
         {
            // mIsClick = false;
-            if (IsReadyToMove == true) //если только что двигали фигуру
+            if (isReadyToMove == true) //если только что двигали фигуру
             {
-                IsReadyToMove = false;
+                isReadyToMove = false;
                 //OnMoveLeave();
             }
-            if (IsMoved == true) //если только что двигали фигуру
+            if (isMoved == true) //если только что двигали фигуру
             {
-                IsMoved = false;
+                isMoved = false;
                 OnMoveLeave();
             }
 
@@ -250,9 +255,9 @@ namespace UltimateROIEditor.Shapes
         {
             if (Contains(new Point(e.X, e.Y))) //если мышь попадает в нашу фигуру
             {
-                if (IsMouseHover == false)
+                if (isMouseHover == false)
                 {
-                    IsMouseHover = true;
+                    isMouseHover = true;
                     OnMouseEnter();
                     //OnMouseEnter();
                     //DragAndDropEnter((object)this, new EventArgs()); //на самом деле MouseEnter
@@ -261,9 +266,9 @@ namespace UltimateROIEditor.Shapes
             }
             else //если двигаем мышь вне фигуры
             {
-                if (IsMouseHover == true)
+                if (isMouseHover == true)
                 {
-                    IsMouseHover = false;
+                    isMouseHover = false;
                     OnMouseLeave();
                 }
             }
@@ -274,9 +279,9 @@ namespace UltimateROIEditor.Shapes
             if (nodeSelected == PosSizableRect.None && IsReadyToMove == true)
             {
                 //двигаем весь прямоугольник, не меняя форму
-                if (IsMoved == false)
+                if (isMoved == false)
                 {
-                    IsMoved = true;
+                    isMoved = true;
                     OnMoveEnter();
                 }
                 OnMoveHover();

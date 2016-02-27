@@ -76,7 +76,8 @@ namespace UltimateROIEditor.Shapes
         {
             g.DrawEllipse(new Pen(Color.Green), rect);
 
-            DrawNodes(g);
+            if (IsActive)
+                DrawNodes(g);
         }
      
         protected override void CreateContextMenu()
@@ -148,7 +149,7 @@ namespace UltimateROIEditor.Shapes
         {
             float x = p.X, y = p.Y, cx = C.X, cy = C.Y, a = RX, b = RY;
             float Factor = (x - cx) * (x - cx) / (a * a) + (y - cy) * (y - cy) / (b * b);
-            Debug.WriteLine(Factor.ToString());
+            //Debug.WriteLine(Factor.ToString());
             return Factor < 1.0f;
         }
     }
