@@ -13,6 +13,9 @@ Author: Ermakov Nikita Vladimirovich
 Created: 02/11/2016
 
 
+Platform: С#, .NET, Visual Studio 2013
+
+
 Current development stage: pre-pre-alpha
 
 
