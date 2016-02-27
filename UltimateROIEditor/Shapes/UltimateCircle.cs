@@ -10,27 +10,46 @@ namespace UltimateROIEditor.Shapes
 {
     public class UltimateCircle : UltimateRectangle
     {
-        int R; //Радиус окружности.
-        Point C; //Центр окружности.
-
-        //private PaintEventHandler h4 = null;
+        int RX; //Radius in x axis
+        int RY; //Radius in y axis
+        Point C; //Center point
 
         public UltimateCircle()
         {
             base.CreateEventHandlers();
             
-            R = 100;
+            RX = RY = 100;
             C = new Point(200, 200);
-            rect = new Rectangle(C.X - R/2, C.Y - R/2, C.X + R/2, C.Y + R/2);
+            rect = new Rectangle(C.X - RX, C.Y - RY, C.X + RY, C.Y + RY);
         }
 
         public UltimateCircle(Point Center, int Radius)
         {
             base.CreateEventHandlers();
 
-            R = Radius;
+            RX = RY = Radius;
             C = Center;
-            rect = new Rectangle(C.X - R / 2, C.Y - R / 2, C.X + R / 2, C.Y + R / 2);
+            rect = new Rectangle(C.X - RX, C.Y - RX, C.X + RX, C.Y + RX);
+        }
+
+        public UltimateCircle(Point Center, int RadiusX, int RadiusY)
+        {
+            base.CreateEventHandlers();
+
+            RX = RadiusX;
+            RY = RadiusY;
+            C = Center;
+            rect = new Rectangle(C.X - RX, C.Y - RY, C.X + RX, C.Y + RY);
+        }
+
+        public UltimateCircle(Rectangle R)
+        {
+            base.CreateEventHandlers();
+
+            rect = R;
+            RX = R.Width / 2;
+            RY = R.Height / 2;
+            C = new Point(R.X + RX, R.Y + RY);   
         }
 
         /*public UltimateCircle(Rectangle R)
