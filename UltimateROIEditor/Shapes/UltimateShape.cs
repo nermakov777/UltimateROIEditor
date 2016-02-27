@@ -8,6 +8,8 @@ using System.Windows.Forms;
 
 namespace UltimateROIEditor.Shapes
 {
+    //basic class for all other shapes
+    
     public abstract class UltimateShape
     {
 
@@ -15,19 +17,24 @@ namespace UltimateROIEditor.Shapes
         public static int count = 0; //количество созданных объектов
         public int InternalID;
 
-
-        //Mouse evenets
-        public event MouseEventHandler MouseDown;
+        //Mouse events
+        //public event MouseEventHandler MouseDown;
+        //public event MouseEventHandler MouseMove;
+        //public event MouseEventHandler MouseUp;
         public event EventHandler MouseEnter;
-        public event MouseEventHandler MouseHover;
-        public event MouseEventHandler MouseLeave;
-        public event MouseEventHandler MouseMove;
-        public event MouseEventHandler MouseUp;
+        public event EventHandler MouseHover;
+        public event EventHandler MouseLeave;
+        
+        //Drag-n-Drop events
+        public event EventHandler DragAndDropEnter; //put object
+        public event EventHandler DragAndDropHover;  //dragging
+        public event EventHandler DragAndDropLeave; //drop object
+        
+        //Activation events
+        public event EventHandler Activated;
+        public event EventHandler Deactivated;
+        public event EventHandler ActivationChanged;
 
-        
-        public event MouseEventHandler DragAndDrop;  //перетаскиваем
-        
-        
         public bool IsContainsMouse = false;
         
         protected int id;
@@ -59,6 +66,48 @@ namespace UltimateROIEditor.Shapes
 
         public abstract bool Contains(Point p); //содержит ли фигура заданную точку
 
+        //Methods for generate events
+        protected virtual void OnMouseEnter()
+        {
+            MouseEnter((object)this, new EventArgs());
+        }
+        protected virtual void OnMouseHover()
+        {
+            MouseHover((object)this, new EventArgs());
+        }
+        protected virtual void OnMouseLeave()
+        {
+            MouseLeave((object)this, new EventArgs());
+        }
+        protected virtual void OnDragAndDropEnter()
+        {
+            /*EventHandler handler = SomeEvent;
+            if (handler != null)
+                handler(this, someArgs);*/
+            
+            DragAndDropEnter((object)this, new EventArgs()); //на самом деле MouseEnter
+        }
+        protected virtual void OnDragAndDropHover()
+        {
+            DragAndDropHover((object)this, new EventArgs());
+        }
+        protected virtual void OnDragAndDropLeave()
+        {
+            DragAndDropLeave((object)this, new EventArgs()); 
+        }
+        protected virtual void OnActivated()
+        {
+            Activated((object)this, new EventArgs());
+        }
+        protected virtual void OnDeactivated()
+        {
+            Deactivated((object)this, new EventArgs());
+        }
+        protected virtual void OnActivationChanged()
+        {
+            ActivationChanged((object)this, new EventArgs());
+        }
+
         public void SetBitmapFile(string filename)
         {
             this.mBmp = new Bitmap(filename);
@@ -83,9 +132,6 @@ namespace UltimateROIEditor.Shapes
         {
             get { return description; }
             set { description = value; }
-        }
-
-        //public abstract void ContainsPoint(Point p);
-        
+        } 
     }
 }

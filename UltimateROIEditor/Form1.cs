@@ -1167,5 +1167,20 @@ namespace UltimateROIEditor
         {
             LogClear();
         }
+
+        private void Form1_MouseEnter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_MouseLeave(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_MouseHover(object sender, EventArgs e)
+        {
+
+        }
     }
 }

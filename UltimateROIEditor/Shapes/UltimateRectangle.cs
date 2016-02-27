@@ -11,8 +11,8 @@ namespace UltimateROIEditor.Shapes
 {
     public class UltimateRectangle : UltimateShape
     {
-        public event EventHandler DragAndDropEnter; //схватили
-        public event EventHandler DragAndDropLeave; //отпустили
+        //public event EventHandler DragAndDropEnter; //схватили
+        //public event EventHandler DragAndDropLeave; //отпустили
         
         protected const int sizeNodeRect = 8;
 
@@ -237,8 +237,9 @@ namespace UltimateROIEditor.Shapes
             {
                 if (IsContainsMouse == false)
                 {
+                    base.OnDragAndDropEnter();
                     //OnMouseEnter();
-                    DragAndDropEnter((object)this, new EventArgs()); //на самом деле MouseEnter
+                    //DragAndDropEnter((object)this, new EventArgs()); //на самом деле MouseEnter
                 }
                 IsContainsMouse = true;
             }
@@ -246,8 +247,9 @@ namespace UltimateROIEditor.Shapes
             {
                 if (IsContainsMouse == true)
                 {
+                    base.OnDragAndDropLeave();
                     //OnMouseEnter();
-                    DragAndDropLeave((object)this, new EventArgs());
+                    //DragAndDropLeave((object)this, new EventArgs());
                 }
                 IsContainsMouse = false;
             }
