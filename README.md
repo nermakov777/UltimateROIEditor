@@ -1,6 +1,5 @@
 # UltimateROIEditor
-2D vector graphics editor
-
+2D vector graphics editor  
 Product name: Ultimate ROI Editor
 
 Working name: Razmechatel (in russian)
