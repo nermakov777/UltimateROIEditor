@@ -1,4 +1,4 @@
-# UltimateROIEditor
+# Ultimate ROI Editor
 2D vector graphics editor  
 
 **Product name:** Ultimate ROI Editor  
