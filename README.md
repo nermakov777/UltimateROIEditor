@@ -15,6 +15,8 @@ Created: 02/11/2016
 
 Platform: С#, .NET, Visual Studio 2013
 
+Type: Windows Forms application
+
 
 Current development stage: pre-pre-alpha
 
