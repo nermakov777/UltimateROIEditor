@@ -2,15 +2,15 @@
 2D vector graphics editor  
 
 **Product name:** Ultimate ROI Editor  
-Working name: Razmechatel (in russian)  
-Author: Ermakov Nikita Vladimirovich  
-Created: 02/11/2016  
-Platform: С#, .NET, Visual Studio 2013  
-Type: Windows Forms application  
-Current development stage: pre-pre-alpha  
-Main field of application: computer vision  
-Purposes: mark up different shapes on image, manual mark up edges of objects  
-Description:  
+**Working name:** Razmechatel (in russian)  
+**Author:** Ermakov Nikita Vladimirovich  
+**Created:** 02/11/2016  
+**Platform:** С#, .NET, Visual Studio 2013  
+**Type:** Windows Forms application  
+**Current development stage:** pre-pre-alpha  
+**Main field of application:** computer vision  
+**Purposes:** mark up different shapes on image, manual mark up edges of objects  
+**Description:**  
 Simple 2D vector graphics editor.
 Allows you to create and edit simple vector graphics, such
 as different geometric primitives - points, rectangles, polygons,
