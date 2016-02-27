@@ -167,23 +167,15 @@ namespace UltimateROIEditor.Shapes
         {
             if (Contains(e.Location)) //нажали внутри фигуры
             {
-                IsMove = true;
+                IsReadyToMove = true; //приготовились двигать всю фигуру
+                IsMoved = false;
                 OnClick(); //???
-                if (IsActive == false)
-                {
-                    IsActive = true;
-                    //OnActivated();
-                    //OnActivationChanged();
-                }
+
+                IsActive = true;
             }
             else  //нажали вне фигуры
             {
-                if (IsActive == true)
-                {
-                    IsActive = false;
-                    //OnDeactivated();
-                    //OnActivationChanged();
-                }
+                IsActive = false;
             }
             
             if (IsActive) //если фигура активирована - можно применять к ней преобразования, например, растяжение
@@ -232,9 +224,14 @@ namespace UltimateROIEditor.Shapes
         private void mPictureBox_MouseUp(object sender, MouseEventArgs e)
         {
            // mIsClick = false;
-            if (IsMove == true) //если только что двигали фигуру
+            if (IsReadyToMove == true) //если только что двигали фигуру
             {
-                IsMove = false;
+                IsReadyToMove = false;
+                //OnMoveLeave();
+            }
+            if (IsMoved == true) //если только что двигали фигуру
+            {
+                IsMoved = false;
                 OnMoveLeave();
             }
 
@@ -260,31 +257,28 @@ namespace UltimateROIEditor.Shapes
                     //OnMouseEnter();
                     //DragAndDropEnter((object)this, new EventArgs()); //на самом деле MouseEnter
                 }
+                OnMouseHover();
             }
             else //если двигаем мышь вне фигуры
             {
                 if (IsMouseHover == true)
                 {
                     IsMouseHover = false;
-                    base.OnMouseLeave();
+                    OnMouseLeave();
                 }
             }
-            //if (nodeSelected == PosSizableRect.None)
-              //  return;
-            //nodeSelected = GetNodeSelectable(e.Location);
-            
-            //ChangeCursor(e.Location);
-            
-            //Form1 F = (Form1)mPictureBox.Parent;
-            //F.LogWrite(mPictureBox.Cursor.ToString());
 
             Point p = new Point(e.X, e.Y);
             WinRECT R = new WinRECT(rect);
 
-            if (nodeSelected == PosSizableRect.None && IsMove == true)
+            if (nodeSelected == PosSizableRect.None && IsReadyToMove == true)
             {
                 //двигаем весь прямоугольник, не меняя форму
-                //OnMoveEnter();
+                if (IsMoved == false)
+                {
+                    IsMoved = true;
+                    OnMoveEnter();
+                }
                 OnMoveHover();
 
                 int dx = e.X - oldX;

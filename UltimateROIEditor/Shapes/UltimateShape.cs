@@ -29,7 +29,8 @@ namespace UltimateROIEditor.Shapes
         public event EventHandler MouseLeave;
         
         //Move events
-        public bool IsMove = false;
+        public bool IsReadyToMove = false;
+        public bool IsMoved = false;
         public event EventHandler MoveEnter; //put object
         public event EventHandler MoveHover;  //dragging
         public event EventHandler MoveLeave; //drop object
@@ -118,7 +119,7 @@ namespace UltimateROIEditor.Shapes
         }
         protected virtual void OnMouseHover()
         {
-            Debug.WriteLine(string.Format("[{0}] Shape {1}: MouseHover", DateTime.Now.ToString(), InternalID.ToString()));
+            //Debug.WriteLine(string.Format("[{0}] Shape {1}: MouseHover", DateTime.Now.ToString(), InternalID.ToString()));
             if (MouseHover != null)
                 MouseHover((object)this, new EventArgs());
         }
