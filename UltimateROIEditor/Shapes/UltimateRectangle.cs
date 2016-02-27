@@ -50,14 +50,14 @@ namespace UltimateROIEditor.Shapes
             //this.mIsClick = false;
             IsInvertedX = false;
             IsInvertedY = false;
-            IsSelected = false;
+            IsActive = false;
             mMove = false;
             nodeSelected = PosSizableRect.None;
-            IsContainsMouse = false;
+            IsMouseHover = false;
 
             //подписка на собственные события
-            DragAndDropEnter += new EventHandler(OnDragAndDropEnter); 
-            DragAndDropLeave += new EventHandler(OnDragAndDropLeave); 
+            MouseEnter += new EventHandler(HandleMouseEnter); 
+            MouseLeave += new EventHandler(HandleMouseLeave); 
         }
         
         public UltimateRectangle (Rectangle rect)
@@ -77,14 +77,14 @@ namespace UltimateROIEditor.Shapes
             IsInvertedX = false;
             IsInvertedY = false;
 
-            IsSelected = false;
+            IsActive = false;
             mMove = false;
             nodeSelected = PosSizableRect.None;
-            IsContainsMouse = false;
+            IsMouseHover = false;
 
             //подписка на собственные события
-            DragAndDropEnter += new EventHandler(OnDragAndDropEnter);
-            DragAndDropLeave += new EventHandler(OnDragAndDropLeave); 
+            MouseEnter += new EventHandler(HandleMouseEnter);
+            MouseLeave += new EventHandler(HandleMouseLeave); 
         }
 
         protected virtual void CreateEventHandlers()
@@ -149,23 +149,44 @@ namespace UltimateROIEditor.Shapes
 	        Nodes[7] = new Point(rect.Left, rect.Top + height/2); //left
         }
 
-        public void OnDragAndDropEnter(object sender, EventArgs e)
+        protected void HandleMouseEnter(object sender, EventArgs e)
         {
             mPictureBox.Cursor = Cursors.SizeAll;
 
-            //Debug.WriteLine(string.Format("[{0}] Enter {1}", DateTime.Now.ToString(), InternalID.ToString()));
+            //Debug.WriteLine(string.Format("[{0}] Shape {1}: MouseEnter", DateTime.Now.ToString(), InternalID.ToString()));
         }
 
-        protected void OnDragAndDropLeave(object sender, EventArgs e)
+        protected void HandleMouseLeave(object sender, EventArgs e)
         {
             mPictureBox.Cursor = Cursors.Default;
 
-            //Debug.WriteLine(string.Format("[{0}] Leave {1}", DateTime.Now.ToString(), InternalID.ToString()));
+            //Debug.WriteLine(string.Format("[{0}] Shape {1}: MouseLeave", DateTime.Now.ToString(), InternalID.ToString()));
         }
 
         protected void mPictureBox_MouseDown(object sender, MouseEventArgs e)
         {
-            if (IsSelected)
+            if (Contains(e.Location)) //нажали внутри фигуры
+            {
+                IsMove = true;
+                OnClick(); //???
+                if (IsActive == false)
+                {
+                    IsActive = true;
+                    //OnActivated();
+                    //OnActivationChanged();
+                }
+            }
+            else  //нажали вне фигуры
+            {
+                if (IsActive == true)
+                {
+                    IsActive = false;
+                    //OnDeactivated();
+                    //OnActivationChanged();
+                }
+            }
+            
+            if (IsActive) //если фигура активирована - можно применять к ней преобразования, например, растяжение
             {
                 //nodeSelected = PosSizableRect.None;
                 nodeSelected = GetNodeSelectable(e.Location); //проверяем на захват одного из узлов
@@ -173,19 +194,6 @@ namespace UltimateROIEditor.Shapes
                     return;
             }
             
-            if (rect.Contains(new Point(e.X, e.Y)))
-            {
-                IsContainsMouse = true;
-                mMove = true;
-                IsSelected = true;  
-            }
-            else
-            {
-                IsContainsMouse = false;
-                mMove = false;
-                IsSelected = false;
-            }
-
             oldX = e.X;
             oldY = e.Y;
         }
@@ -193,14 +201,14 @@ namespace UltimateROIEditor.Shapes
         private void ChangeCursor(Point p)
         {
             Cursor c = GetCursor(GetNodeSelectable(p), p);
-            if (IsContainsMouse)
+            if (IsMouseHover)
                 mPictureBox.Cursor = c;
         }
 
         private Cursor GetCursor(PosSizableRect pos, Point p)
         {
             //если такщим какой-нибудь угол
-            if (IsSelected)
+            if (IsActive)
             {
                 if (pos == PosSizableRect.LeftUp) return Cursors.SizeNWSE;
                 else if (pos == PosSizableRect.LeftMiddle) return Cursors.SizeWE;
@@ -224,7 +232,12 @@ namespace UltimateROIEditor.Shapes
         private void mPictureBox_MouseUp(object sender, MouseEventArgs e)
         {
            // mIsClick = false;
-            mMove = false;
+            if (IsMove == true) //если только что двигали фигуру
+            {
+                IsMove = false;
+                OnMoveLeave();
+            }
+
             nodeSelected = PosSizableRect.None;
 
             //if (e.Button == MouseButtons.Right)
@@ -240,23 +253,21 @@ namespace UltimateROIEditor.Shapes
         {
             if (Contains(new Point(e.X, e.Y))) //если мышь попадает в нашу фигуру
             {
-                if (IsContainsMouse == false)
+                if (IsMouseHover == false)
                 {
-                    base.OnDragAndDropEnter();
+                    IsMouseHover = true;
+                    OnMouseEnter();
                     //OnMouseEnter();
                     //DragAndDropEnter((object)this, new EventArgs()); //на самом деле MouseEnter
                 }
-                IsContainsMouse = true;
             }
-            else
+            else //если двигаем мышь вне фигуры
             {
-                if (IsContainsMouse == true)
+                if (IsMouseHover == true)
                 {
-                    base.OnDragAndDropLeave();
-                    //OnMouseEnter();
-                    //DragAndDropLeave((object)this, new EventArgs());
+                    IsMouseHover = false;
+                    base.OnMouseLeave();
                 }
-                IsContainsMouse = false;
             }
             //if (nodeSelected == PosSizableRect.None)
               //  return;
@@ -270,9 +281,12 @@ namespace UltimateROIEditor.Shapes
             Point p = new Point(e.X, e.Y);
             WinRECT R = new WinRECT(rect);
 
-            if (nodeSelected == PosSizableRect.None && mMove == true)
+            if (nodeSelected == PosSizableRect.None && IsMove == true)
             {
                 //двигаем весь прямоугольник, не меняя форму
+                //OnMoveEnter();
+                OnMoveHover();
+
                 int dx = e.X - oldX;
                 int dy = e.Y - oldY;
                 rect.X += dx;
@@ -398,7 +412,7 @@ namespace UltimateROIEditor.Shapes
         {
             g.DrawRectangle(new Pen(Color.Red), rect);
 
-            if (IsSelected)
+            if (IsActive)
                 DrawNodes(g);
 
             /*foreach (PosSizableRect pos in Enum.GetValues(typeof(PosSizableRect)))

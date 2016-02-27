@@ -8,6 +8,8 @@ using System.Windows.Forms;
 
 namespace UltimateROIEditor.Shapes
 {
+    //actually it is circle with small radius
+    
     class UltimatePoint : UltimateShape
     {
         public Point p;
@@ -142,7 +144,7 @@ namespace UltimateROIEditor.Shapes
         private void mPictureBox_MouseUp(object sender, MouseEventArgs e)
         {
             //mIsClick = false;
-            IsSelected = false;
+            IsActive = false;
             mMove = false;
 
             isMovingVertices = false;

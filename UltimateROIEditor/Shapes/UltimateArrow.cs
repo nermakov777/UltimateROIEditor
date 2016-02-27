@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace UltimateROIEditor.Shapes
 {
-    class UltimatArrow : UltimateLine
+    public class UltimateArrow : UltimateLine
     {
+    
     }
 }
