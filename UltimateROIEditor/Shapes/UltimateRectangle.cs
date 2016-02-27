@@ -231,6 +231,11 @@ namespace UltimateROIEditor.Shapes
              //   myContextMenu.Show((System.Windows.Forms.Control)sender, new Point(e.X, e.Y));
         }
 
+        public virtual void RecalcParams()
+        {
+            RecalcNodes();
+        }
+
         private void mPictureBox_MouseMove(object sender, MouseEventArgs e)
         {
             if (Contains(new Point(e.X, e.Y))) //если мышь попадает в нашу фигуру
@@ -272,7 +277,8 @@ namespace UltimateROIEditor.Shapes
                 int dy = e.Y - oldY;
                 rect.X += dx;
                 rect.Y += dy;
-                RecalcNodes();
+                RecalcParams();
+                //RecalcNodes();
                 mPictureBox.Invalidate();
                 oldX = e.X;
                 oldY = e.Y;

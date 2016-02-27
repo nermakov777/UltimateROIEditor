@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace UltimateROIEditor.Shapes
 {
@@ -19,8 +20,8 @@ namespace UltimateROIEditor.Shapes
             base.CreateEventHandlers();
             
             RX = RY = 100;
-            C = new Point(200, 200);
-            rect = new Rectangle(C.X - RX, C.Y - RY, C.X + RY, C.Y + RY);
+            C = new Point(100, 100);
+            rect = new Rectangle(C.X - RX, C.Y - RY, 2 * RX, 2 * RY);
         }
 
         public UltimateCircle(Point Center, int Radius)
@@ -50,6 +51,15 @@ namespace UltimateROIEditor.Shapes
             RX = R.Width / 2;
             RY = R.Height / 2;
             C = new Point(R.X + RX, R.Y + RY);   
+        }
+
+        public override void RecalcParams()
+        {
+            base.RecalcParams();
+            
+            RX = rect.Width / 2;
+            RY = rect.Height / 2;
+            C = new Point(rect.X + RX, rect.Y + RY);   
         }
 
         /*public UltimateCircle(Rectangle R)
@@ -132,6 +142,14 @@ namespace UltimateROIEditor.Shapes
             {
                 System.Console.WriteLine(exp.Message);
             }
+        }
+
+        public override bool Contains(Point p)
+        {
+            float x = p.X, y = p.Y, cx = C.X, cy = C.Y, a = RX, b = RY;
+            float Factor = (x - cx) * (x - cx) / (a * a) + (y - cy) * (y - cy) / (b * b);
+            Debug.WriteLine(Factor.ToString());
+            return Factor < 1.0f;
         }
     }
 }

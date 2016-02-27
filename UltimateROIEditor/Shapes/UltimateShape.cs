@@ -21,16 +21,37 @@ namespace UltimateROIEditor.Shapes
         //public event MouseEventHandler MouseDown;
         //public event MouseEventHandler MouseMove;
         //public event MouseEventHandler MouseUp;
+        public bool IsMouseHover = false;
         public event EventHandler MouseEnter;
         public event EventHandler MouseHover;
         public event EventHandler MouseLeave;
         
-        //Drag-n-Drop events
-        public event EventHandler DragAndDropEnter; //put object
-        public event EventHandler DragAndDropHover;  //dragging
-        public event EventHandler DragAndDropLeave; //drop object
+        //Move events
+        public bool IsMove = false;
+        public event EventHandler MoveEnter; //put object
+        public event EventHandler MoveHover;  //dragging
+        public event EventHandler MoveLeave; //drop object
+
+        //Stretch events
+        public bool IsStretch = false;
+        public event EventHandler StretchEnter; //begin stretching
+        public event EventHandler StretchHover;  //stretching
+        public event EventHandler StretchLeave; //end stretching
+
+        //Rotate events
+        public bool IsRotate = false;
+        public event EventHandler RotateEnter; //begin rotation
+        public event EventHandler RotateHover;  //rotation
+        public event EventHandler RotateLeave; //end rotation
+
+        //Reshape events (by vertex)
+        public bool IsReshape = false;
+        public event EventHandler ReshapeEnter; //begin reshaping
+        public event EventHandler ReshapeHover;  //reshaping
+        public event EventHandler ReshapeLeave; //end reshaping
         
         //Activation events
+        public bool IsActive = false;
         public event EventHandler Activated;
         public event EventHandler Deactivated;
         public event EventHandler ActivationChanged;
