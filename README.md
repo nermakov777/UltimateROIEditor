@@ -3,7 +3,6 @@
 
 Product name: Ultimate ROI Editor
 
-
 Working name: Razmechatel (in russian)
 
 
