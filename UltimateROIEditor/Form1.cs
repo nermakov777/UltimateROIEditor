@@ -1030,20 +1030,7 @@ namespace UltimateROIEditor
             
         }
 
-        public void LogWrite(string message)
-        {
-            LogBox.Text = message;
-        }
-
-        public void LogAppend(string message)
-        {
-            LogBox.AppendText(message);
-        }
-
-        public void LogClear()
-        {
-            LogBox.Clear();
-        }
+        
 
         private void Form1_Shown(object sender, EventArgs e)
         {
@@ -1165,7 +1152,7 @@ namespace UltimateROIEditor
 
         private void button1_Click(object sender, EventArgs e)
         {
-            LogClear();
+            //LogClear();
         }
 
         private void Form1_MouseEnter(object sender, EventArgs e)

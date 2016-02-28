@@ -86,8 +86,6 @@
             this.btnAddPoly5 = new System.Windows.Forms.Button();
             this.btnAddPoly6 = new System.Windows.Forms.Button();
             this.btnAddLomania = new System.Windows.Forms.Button();
-            this.LogBox = new System.Windows.Forms.RichTextBox();
-            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMain)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.contextMenuStrip2.SuspendLayout();
@@ -105,7 +103,7 @@
             this.pictureBoxMain.BackColor = System.Drawing.SystemColors.ControlDark;
             this.pictureBoxMain.Location = new System.Drawing.Point(136, 91);
             this.pictureBoxMain.Name = "pictureBoxMain";
-            this.pictureBoxMain.Size = new System.Drawing.Size(740, 384);
+            this.pictureBoxMain.Size = new System.Drawing.Size(740, 483);
             this.pictureBoxMain.TabIndex = 0;
             this.pictureBoxMain.TabStop = false;
             this.pictureBoxMain.SizeChanged += new System.EventHandler(this.pictureBoxMain_SizeChanged);
@@ -564,33 +562,11 @@
             this.btnAddLomania.UseVisualStyleBackColor = true;
             this.btnAddLomania.Click += new System.EventHandler(this.btnAddLomania_Click);
             // 
-            // LogBox
-            // 
-            this.LogBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.LogBox.Location = new System.Drawing.Point(136, 481);
-            this.LogBox.Name = "LogBox";
-            this.LogBox.Size = new System.Drawing.Size(740, 93);
-            this.LogBox.TabIndex = 41;
-            this.LogBox.Text = "";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(15, 494);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(87, 38);
-            this.button1.TabIndex = 42;
-            this.button1.Text = "Clear Console";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(888, 586);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.LogBox);
             this.Controls.Add(this.btnAddLomania);
             this.Controls.Add(this.btnAddPoly6);
             this.Controls.Add(this.btnAddPoly5);
@@ -699,8 +675,6 @@
         private System.Windows.Forms.Button btnAddPoly5;
         private System.Windows.Forms.Button btnAddPoly6;
         private System.Windows.Forms.Button btnAddLomania;
-        private System.Windows.Forms.RichTextBox LogBox;
-        private System.Windows.Forms.Button button1;
     }
 }
 
