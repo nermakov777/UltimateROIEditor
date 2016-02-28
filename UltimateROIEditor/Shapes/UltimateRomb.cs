@@ -11,25 +11,38 @@ namespace UltimateROIEditor.Shapes
     
     public class UltimateRomb : UltimateRectangle
     {
+        Point[] points;
+        
         public UltimateRomb(Rectangle rect)
         {
             CreateEventHandlers();
-            this.rect = rect;  
+            this.rect = rect;
+            points = new Point[4];
+            RecalcParams();
+        }
+
+        public override void RecalcParams()
+        {
+            base.RecalcParams();
+
+            points[0] = new Point((rect.Left + rect.Right) / 2, rect.Top);
+            points[1] = new Point(rect.Left, (rect.Top + rect.Bottom) / 2);
+            points[2] = new Point((rect.Left + rect.Right) / 2, rect.Bottom);
+            points[3] = new Point(rect.Right, (rect.Top + rect.Bottom) / 2);
         }
         
         public override void Draw(Graphics g)
         {
+            RecalcParams();
+            g.DrawPolygon(new Pen(Color.Black), points);
+            if (IsActive)
+                DrawNodes(g);
+        }
 
-            //Pen redPen = new Pen(Color.Red);
-            Point[] temp = new Point[4];
-            temp[0] = new Point((rect.Left + rect.Right)/2, rect.Top);
-            temp[1] = new Point(rect.Left, (rect.Top + rect.Bottom) / 2);
-            temp[2] = new Point((rect.Left + rect.Right) / 2, rect.Bottom);
-            temp[3] = new Point(rect.Right, (rect.Top + rect.Bottom) / 2);
-
-            g.DrawPolygon(new Pen(Color.Black), temp);
-
-            DrawNodes(g);
+        public override bool Contains(Point p)
+        {
+            RecalcParams();
+            return UltimateROIEditor.Math.UltimateMath.Contains(points, p);
         }
     }
 }

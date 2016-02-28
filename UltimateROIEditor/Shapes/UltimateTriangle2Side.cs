@@ -11,41 +11,44 @@ namespace UltimateROIEditor.Shapes
 
     public class UltimateTriangle2Side : UltimateRectangle
     {
-        //public Point[] pts;
+        Point[] points;
 
         public UltimateTriangle2Side(Rectangle rect)
         {
             CreateEventHandlers();
-            this.rect = rect;  
+            this.rect = rect;
+            points = new Point[3];
+            RecalcParams();
+        }
+
+        public override void RecalcParams()
+        {
+            base.RecalcParams();
+
+            points[0] = new Point((rect.Left + rect.Right) / 2, rect.Top);
+            points[1] = new Point(rect.Left, rect.Bottom);
+            points[2] = new Point(rect.Right, rect.Bottom);
+
+            if (IsInvertedY)
+            {
+                points[0].Y = rect.Bottom;
+                points[1].Y = rect.Top;
+                points[2].Y = rect.Top;
+            }
         }
         
         public override void Draw(Graphics g)
         {
+            RecalcParams();
+            g.DrawPolygon(new Pen(Color.Black), points);
+            if (IsActive)
+                DrawNodes(g);   
+        }
 
-            //Pen redPen = new Pen(Color.Red);
-            Point[] temp = new Point[3];
-            temp[0] = new Point((rect.Left + rect.Right)/2, rect.Top);
-            temp[1] = new Point(rect.Left, rect.Bottom);
-            temp[2] = new Point(rect.Right, rect.Bottom);
-            //temp[3] = new Point(rect.Right, (rect.Top + rect.Bottom) / 2);
-
-            if (IsInvertedY)
-            {
-                temp[0].Y = rect.Bottom;
-                temp[1].Y = rect.Top;
-                temp[2].Y = rect.Top;
-            }
-
-            g.DrawPolygon(new Pen(Color.Black), temp);
-
-            DrawNodes(g);
-            /*foreach (Point p in temp)
-            {
-                int a = 4;
-                Rectangle VertexRect = new Rectangle(p.X - a / 2, p.Y - a / 2, a, a);
-                g.FillEllipse(new SolidBrush(Color.White), VertexRect);
-                g.DrawEllipse(new Pen(Color.Black), VertexRect);
-            }*/
+        public override bool Contains(Point p)
+        {
+            RecalcParams();
+            return UltimateROIEditor.Math.UltimateMath.Contains(points, p);
         }
     }
 }

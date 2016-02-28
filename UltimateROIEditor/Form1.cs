@@ -1187,5 +1187,21 @@ namespace UltimateROIEditor
         {
 
         }
+
+        private void btnAddParallel_Click(object sender, EventArgs e)
+        {
+            UltimateParallel u = new UltimateParallel(new Rectangle(100, 100, 300, 100));
+            u.SetPictureBox(pictureBox);
+            figures.Add(u);
+            pictureBox.Invalidate();
+        }
+
+        private void btnAddTrapecia_Click(object sender, EventArgs e)
+        {
+            UltimateTrapecia u = new UltimateTrapecia(new Rectangle(100, 100, 300, 100));
+            u.SetPictureBox(pictureBox);
+            figures.Add(u);
+            pictureBox.Invalidate();
+        }
     }
 }

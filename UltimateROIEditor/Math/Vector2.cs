@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace UltimateROIEditor.Math
 {
+    //Vector2.
+    //Inspired by Unity3D Vector2 class.
+    
     public class Vector2 : Object
     {
         public const float kEpsilon = 1e-005f;
@@ -44,9 +47,9 @@ namespace UltimateROIEditor.Math
         {
             return new Vector2(b.x - a.x, b.y - a.y);
         }
-        public static bool operator !=(Vector2 lhs, Vector2 rhs)
+        public static bool operator !=(Vector2 a, Vector2 b)
         {
-            return ((lhs.x != rhs.x) || (lhs.y != rhs.y));
+            return ((a.x != b.x) || (a.y != b.y));
         }
         public static Vector2 operator *(float d, Vector2 a)
         {
@@ -308,7 +311,7 @@ namespace UltimateROIEditor.Math
         //public static Vector2 SmoothDamp(Vector2 current, Vector2 target, ref Vector2 currentVelocity, float smoothTime, float maxSpeed, float deltaTime);
         public float SqrMagnitude()
         { 
-            return (x * x + y * y);   
+            return (x*x + y*y);   
         }
         public static float SqrMagnitude(Vector2 a)
         { 
@@ -320,5 +323,10 @@ namespace UltimateROIEditor.Math
             return string.Format("({0}, {1})", x, y);
         }
         //public string ToString(string format);
+
+        public static Vector2 FromPoint(System.Drawing.Point p)
+        {
+            return new Vector2(p.X, p.Y);
+        }
     }
 }

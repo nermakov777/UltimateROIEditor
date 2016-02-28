@@ -524,6 +524,7 @@
             this.btnAddTrapecia.Size = new System.Drawing.Size(32, 32);
             this.btnAddTrapecia.TabIndex = 36;
             this.btnAddTrapecia.UseVisualStyleBackColor = true;
+            this.btnAddTrapecia.Click += new System.EventHandler(this.btnAddTrapecia_Click);
             // 
             // btnAddParallel
             // 
@@ -533,6 +534,7 @@
             this.btnAddParallel.Size = new System.Drawing.Size(32, 32);
             this.btnAddParallel.TabIndex = 37;
             this.btnAddParallel.UseVisualStyleBackColor = true;
+            this.btnAddParallel.Click += new System.EventHandler(this.btnAddParallel_Click);
             // 
             // btnAddPoly5
             // 
