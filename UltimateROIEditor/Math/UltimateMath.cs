@@ -8,7 +8,7 @@ using System.Drawing;
 
 namespace UltimateROIEditor.Math
 {
-    //Geometry algorithms is from: http://e-maxx.ru/algo/
+    //Geometry algorithms taked from: http://e-maxx.ru/algo/
     
     public class UltimateMath
     {

@@ -37,9 +37,19 @@ namespace UltimateROIEditor.Shapes
         //public event MouseEventHandler MouseMove;
         //public event MouseEventHandler MouseUp;
         protected bool isMouseHover = false;
-        public bool IsMouseHover
+        public bool IsMouseHover //мышь находится внутри фигуры
         {
             get { return isMouseHover; }
+            set
+            {
+                bool oldValue = isMouseHover;
+                isMouseHover = value;
+                //OnActivationChanged();
+                if (oldValue == false && value == true)
+                    OnMouseEnter();
+                if (oldValue == true && value == false)
+                    OnMouseLeave();
+            }
         }
         public event EventHandler Click; //Click inside shape
         public event EventHandler MouseEnter;
@@ -62,7 +72,21 @@ namespace UltimateROIEditor.Shapes
         public event EventHandler MoveLeave; //drop object
 
         //Stretch events
-        public bool IsStretch = false;
+        private bool isStretch = false;
+        public bool IsStretch
+        {
+            get { return isStretch; }
+            set
+            {
+                bool oldValue = isStretch;
+                isStretch = value;
+                //OnActivationChanged();
+                if (oldValue == false && value == true)
+                    OnStretchEnter();
+                if (oldValue == true && value == false)
+                    OnStretchLeave();
+            }
+        }
         public event EventHandler StretchEnter; //begin stretching
         public event EventHandler StretchHover;  //stretching
         public event EventHandler StretchLeave; //end stretching

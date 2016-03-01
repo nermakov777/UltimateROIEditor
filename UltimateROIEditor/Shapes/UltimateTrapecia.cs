@@ -45,7 +45,7 @@ namespace UltimateROIEditor.Shapes
             RecalcParams();
             g.DrawPolygon(new Pen(Color.Black), points);
             if (IsActive)
-                DrawNodes(g);   
+                DrawNodes(g);
         }
 
         public override bool Contains(Point p)
