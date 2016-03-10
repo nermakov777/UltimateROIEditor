@@ -96,6 +96,12 @@
     <Compile Include="Math\ULine.cs" />
     <Compile Include="Math\Vector2.cs" />
     <Compile Include="Shapes\ShapeCreator.cs" />
+    <Compile Include="Shapes\ShapeCreatorCircle.cs" />
+    <Compile Include="Shapes\ShapeCreatorRectangle.cs" />
+    <Compile Include="Shapes\ShapeCreatorRomb.cs" />
+    <Compile Include="Shapes\ShapeCreatorTrapecia.cs" />
+    <Compile Include="Shapes\ShapeCreatorTriangle2Side.cs" />
+    <Compile Include="Shapes\ShapeCreatorTriangleRectangular.cs" />
     <Compile Include="Shapes\UltimateCircle.cs" />
     <Compile Include="Shapes\UltimateShape.cs" />
     <Compile Include="Shapes\UltimateGoodPolygon.cs" />

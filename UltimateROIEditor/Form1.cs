@@ -1108,31 +1108,41 @@ namespace UltimateROIEditor
 
         private void btnAddRomb_Click(object sender, EventArgs e)
         {
-            UltimateRomb u = new UltimateRomb(new Rectangle(100,100,300,300));
-            u.SetPictureBox(pictureBox);
-            figures.Add(u);
-            pictureBox.Invalidate();
+            //UltimateRomb u = new UltimateRomb(new Rectangle(100,100,300,300));
+            //u.SetPictureBox(pictureBox);
+            //figures.Add(u);
+            //pictureBox.Invalidate();
+
+            mode = 1;
+            Creator = new ShapeCreatorRomb();
         }
 
         private void btnAddTriangle2Side_Click(object sender, EventArgs e)
         {
-            UltimateTriangle2Side u = new UltimateTriangle2Side(new Rectangle(100, 100, 300, 300));
-            u.SetPictureBox(pictureBox);
-            figures.Add(u);
-            pictureBox.Invalidate();
+            //UltimateTriangle2Side u = new UltimateTriangle2Side(new Rectangle(100, 100, 300, 300));
+            //u.SetPictureBox(pictureBox);
+            //figures.Add(u);
+            //pictureBox.Invalidate();
+
+            mode = 1;
+            Creator = new ShapeCreatorTriangle2Side();
         }
 
         private void bntAddTriangleRect_Click(object sender, EventArgs e)
         {
-            UltimateTriangleRectangular u = new UltimateTriangleRectangular(new Rectangle(100, 100, 300, 300));
-            u.SetPictureBox(pictureBox);
-            figures.Add(u);
-            pictureBox.Invalidate();
+            //UltimateTriangleRectangular u = new UltimateTriangleRectangular(new Rectangle(100, 100, 300, 300));
+            //u.SetPictureBox(pictureBox);
+            //figures.Add(u);
+            //pictureBox.Invalidate();
+
+            mode = 1;
+            Creator = new ShapeCreatorTriangleRectangular();
         }
 
         private void btnAddRectangle_Click(object sender, EventArgs e)
         {
             mode = 1;
+            Creator = new ShapeCreatorRectangle();
 
             /*UltimateRectangle urect = new UltimateRectangle(new Rectangle(100, 100, 200, 200));
             urect.SetPictureBox(pictureBox);
@@ -1144,10 +1154,13 @@ namespace UltimateROIEditor
 
         private void btnAddEllipse_Click(object sender, EventArgs e)
         {
-            UltimateCircle u = new UltimateCircle();
-            u.SetPictureBox(pictureBox);
-            figures.Add(u);
-            pictureBox.Invalidate();
+            //UltimateCircle u = new UltimateCircle();
+            //u.SetPictureBox(pictureBox);
+            //figures.Add(u);
+            //pictureBox.Invalidate();
+
+            mode = 1;
+            Creator = new ShapeCreatorCircle();
         }
 
         private void btnAddLomania_Click(object sender, EventArgs e)
@@ -1195,10 +1208,13 @@ namespace UltimateROIEditor
 
         private void btnAddTrapecia_Click(object sender, EventArgs e)
         {
-            UltimateTrapecia u = new UltimateTrapecia(new Rectangle(100, 100, 300, 100));
-            u.SetPictureBox(pictureBox);
-            figures.Add(u);
-            pictureBox.Invalidate();
+            //UltimateTrapecia u = new UltimateTrapecia(new Rectangle(100, 100, 300, 100));
+            //u.SetPictureBox(pictureBox);
+            //figures.Add(u);
+            //pictureBox.Invalidate();
+
+            mode = 1;
+            Creator = new ShapeCreatorTrapecia();
         }
     }
 }
