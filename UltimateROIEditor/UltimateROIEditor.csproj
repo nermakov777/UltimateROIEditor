@@ -98,6 +98,7 @@
     <Compile Include="Shapes\ShapeCreator.cs" />
     <Compile Include="Shapes\ShapeCreatorCircle.cs" />
     <Compile Include="Shapes\ShapeCreatorLine.cs" />
+    <Compile Include="Shapes\ShapeCreatorParallel.cs" />
     <Compile Include="Shapes\ShapeCreatorRectangle.cs" />
     <Compile Include="Shapes\ShapeCreatorRomb.cs" />
     <Compile Include="Shapes\ShapeCreatorTrapecia.cs" />

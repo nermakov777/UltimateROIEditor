@@ -23,7 +23,7 @@ namespace UltimateROIEditor.Shapes
         { 
         
         }
-        public virtual void CreateInThisPoint(int x, int y, PictureBox pictureBox, List<UltimateShape> figures)
+        public virtual void CreateInThisPoint(int x, int y, PictureBox pictureBox, List<UltimateShape> figures) 
         { 
             
         }

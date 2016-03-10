@@ -1203,10 +1203,13 @@ namespace UltimateROIEditor
 
         private void btnAddParallel_Click(object sender, EventArgs e)
         {
-            UltimateParallel u = new UltimateParallel(new Rectangle(100, 100, 300, 100));
-            u.SetPictureBox(pictureBox);
-            figures.Add(u);
-            pictureBox.Invalidate();
+            //UltimateParallel u = new UltimateParallel(new Rectangle(100, 100, 300, 100));
+            //u.SetPictureBox(pictureBox);
+            //figures.Add(u);
+            //pictureBox.Invalidate();
+
+            mode = 1;
+            Creator = new ShapeCreatorParallel();
         }
 
         private void btnAddTrapecia_Click(object sender, EventArgs e)
