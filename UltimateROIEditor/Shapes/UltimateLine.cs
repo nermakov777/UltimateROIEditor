@@ -18,9 +18,9 @@ namespace UltimateROIEditor.Shapes
         protected MouseEventHandler h1 = null, h2 = null, h3 = null;
         protected PaintEventHandler h4 = null;
 
-        int index = -1;
+        public int index = -1;
 
-        bool isMovingVertices = false;
+        public bool isMovingVertices = false;
 
         public UltimateLine(Point A, Point B)
         {

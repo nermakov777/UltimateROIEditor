@@ -1100,10 +1100,13 @@ namespace UltimateROIEditor
 
         private void btnAddLine_Click(object sender, EventArgs e)
         {
-            UltimateLine u = new UltimateLine(new Point(100,100), new Point(200,200));
-            u.SetPictureBox(pictureBox);
-            figures.Add(u);
-            pictureBox.Invalidate();
+            //UltimateLine u = new UltimateLine(new Point(100,100), new Point(200,200));
+            //u.SetPictureBox(pictureBox);
+            //figures.Add(u);
+            //pictureBox.Invalidate();
+
+            mode = 1;
+            Creator = new ShapeCreatorLine();
         }
 
         private void btnAddRomb_Click(object sender, EventArgs e)
