@@ -68,6 +68,7 @@ namespace UltimateROIEditor.Shapes
             g.DrawEllipse(new Pen(Color.Black), VertexRect);
         }
 
+        //set picture box as container for shape drawing
         public override void SetPictureBox(PictureBox p)
         {
             //отвязываемся от старого контейнера
@@ -80,6 +81,8 @@ namespace UltimateROIEditor.Shapes
             mPictureBox.MouseMove += h3;
             mPictureBox.Paint += h4;
         }
+
+        //release current picture box
         public override void ReleasePictureBox()
         {
             if (this.mPictureBox != null)
@@ -183,6 +186,8 @@ namespace UltimateROIEditor.Shapes
 
             mPictureBox.Invalidate();
         }
+
+        
     
     }
 }

@@ -21,6 +21,7 @@ namespace UltimateROIEditor.Shapes
         BottomMiddle,
         None
     };
+    //
     
     //Базовая функциональность программы (Редактор векторной графики) основана на идее автофигур из Microsoft Word 2003.
 

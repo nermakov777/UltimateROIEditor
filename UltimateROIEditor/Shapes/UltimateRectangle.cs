@@ -86,11 +86,11 @@ namespace UltimateROIEditor.Shapes
             MouseEnter += new EventHandler(HandleMouseEnter);
             MouseLeave += new EventHandler(HandleMouseLeave); 
         }
-        ~UltimateRectangle()
+        /*~UltimateRectangle()
         {
             count--;
             Debug.WriteLine("Shape destructed. Count = {0}", count.ToString());
-        }
+        }*/
 
         protected virtual void CreateEventHandlers()
         {
@@ -156,56 +156,78 @@ namespace UltimateROIEditor.Shapes
 
         protected void HandleMouseEnter(object sender, EventArgs e)
         {
-            mPictureBox.Cursor = Cursors.SizeAll;
+            try
+            {
+                mPictureBox.Cursor = Cursors.SizeAll;
+            }
+            catch (System.NullReferenceException ex)
+            {
+                MessageBox.Show("HandleMouseEnter", "exception");
+            }
         }
 
         protected void HandleMouseLeave(object sender, EventArgs e)
         {
-            mPictureBox.Cursor = Cursors.Default;
+            try
+            {
+                mPictureBox.Cursor = Cursors.Default;
+            }
+            catch (System.NullReferenceException ex)
+            {
+                MessageBox.Show("HandleMouseLeave", "exception");
+            }
         }
 
         protected void mPictureBox_MouseDown(object sender, MouseEventArgs e)
         {
-            bool IsContaintsPoint = Contains(e.Location);
-            
-            if (IsActive == false)  //фигура неактивна
+            try
             {
-                if (IsContaintsPoint) //нажали внутри фигуры
+                bool IsContaintsPoint = Contains(e.Location);
+
+                if (IsActive == false)  //фигура неактивна
                 {
-                    isReadyToMove = true; //приготовились двигать всю фигуру
-                    isMoved = false;
-                    OnClick();
-                    IsActive = true;
-                }
-            }
-            else  //фигура активна
-            {
-                nodeSelected = GetNodeSelectable(e.Location); //проверяем на клик по узлу
-                if (nodeSelected != PosSizableRect.None) //кликнули по ноду
-                {
-                    //активируем стретчинг фигуры
-                    IsStretch = true;
-                }
-                else //не по ноду
-                {
-                    //не по ноду, но внутри фигуры
-                    if (IsContaintsPoint)
+                    if (IsContaintsPoint) //нажали внутри фигуры
                     {
                         isReadyToMove = true; //приготовились двигать всю фигуру
                         isMoved = false;
                         OnClick();
                         IsActive = true;
                     }
-                    else  //не по ноду и не внутри фигуры
+                }
+                else  //фигура активна
+                {
+                    nodeSelected = GetNodeSelectable(e.Location); //проверяем на клик по узлу
+                    if (nodeSelected != PosSizableRect.None) //кликнули по ноду
                     {
-                        //деактивируем фигуру
-                        IsActive = false;
+                        //активируем стретчинг фигуры
+                        IsStretch = true;
+                    }
+                    else //не по ноду
+                    {
+                        //не по ноду, но внутри фигуры
+                        if (IsContaintsPoint)
+                        {
+                            isReadyToMove = true; //приготовились двигать всю фигуру
+                            isMoved = false;
+                            OnClick();
+                            IsActive = true;
+                        }
+                        else  //не по ноду и не внутри фигуры
+                        {
+                            //деактивируем фигуру
+                            IsActive = false;
+                        }
                     }
                 }
-            } 
-            
-            oldX = e.X;
-            oldY = e.Y;
+
+                oldX = e.X;
+                oldY = e.Y;
+            }
+            catch (System.NullReferenceException ex)
+            {
+                MessageBox.Show("mPictureBox_MouseDown", "exception");
+                //Debug.WriteLine("mPictureBox_MouseDown");
+            }
         }
 
         private void ChangeCursor(Point p)
@@ -241,23 +263,31 @@ namespace UltimateROIEditor.Shapes
 
         private void mPictureBox_MouseUp(object sender, MouseEventArgs e)
         {
-           // mIsClick = false;
-            if (isReadyToMove == true) //если только что двигали фигуру
+            try
             {
-                isReadyToMove = false;
-                //OnMoveLeave();
+
+                if (isReadyToMove == true) //если только что двигали фигуру
+                {
+                    isReadyToMove = false;
+                    //OnMoveLeave();
+                }
+                if (isMoved == true) //если только что двигали фигуру
+                {
+                    isMoved = false;
+                    OnMoveLeave(); //TODO: встроить в свойство
+                }
+
+                nodeSelected = PosSizableRect.None;
+                IsStretch = false;
+
+                //if (e.Button == MouseButtons.Right)
+                //   myContextMenu.Show((System.Windows.Forms.Control)sender, new Point(e.X, e.Y));
             }
-            if (isMoved == true) //если только что двигали фигуру
+            catch (System.NullReferenceException ex)
             {
-                isMoved = false;
-                OnMoveLeave(); //TODO: встроить в свойство
+                MessageBox.Show("mPictureBox_MouseUp", "exception");
+                //Debug.WriteLine("mPictureBox_MouseUp");
             }
-
-            nodeSelected = PosSizableRect.None;
-            IsStretch = false;
-
-            //if (e.Button == MouseButtons.Right)
-             //   myContextMenu.Show((System.Windows.Forms.Control)sender, new Point(e.X, e.Y));
         }
 
         public virtual void RecalcParams()
@@ -267,65 +297,73 @@ namespace UltimateROIEditor.Shapes
 
         private void mPictureBox_MouseMove(object sender, MouseEventArgs e)
         {
-            if (Contains(new Point(e.X, e.Y))) //если мышь попадает в нашу фигуру
+            try
             {
-                isMouseHover = true;
-                OnMouseHover();
-            }
-            else //если двигаем мышь вне фигуры
-            {
-                isMouseHover = false;
-            }
-
-            //если никакой из узлов не захвачен и фигура готова к движению
-            if (nodeSelected == PosSizableRect.None && IsReadyToMove == true)
-            {
-                //двигаем весь прямоугольник, не меняя форму
-                if (isMoved == false)
+                if (Contains(new Point(e.X, e.Y))) //если мышь попадает в нашу фигуру
                 {
-                    isMoved = true;
-                    OnMoveEnter();
+                    isMouseHover = true;
+                    OnMouseHover();
                 }
-                OnMoveHover();
-
-                int dx = e.X - oldX;
-                int dy = e.Y - oldY;
-                rect.X += dx;
-                rect.Y += dy;
-                RecalcParams();
-                //RecalcNodes();
-                mPictureBox.Invalidate();
-                oldX = e.X;
-                oldY = e.Y;
-                //return;
-            }
-            if (nodeSelected != PosSizableRect.None) //если какой-то из узлов захвачен
-            {
-                Point p = new Point(e.X, e.Y);
-                WinRECT R = new WinRECT(rect);
-                
-                //меняем параметры ректа в зависимости от того, какой угол захвачен
-                StretchRectAccordingNewNodePosition(nodeSelected, ref R, p);
-
-                //при перемещении узлов могут поменяться местами левая сторона и правая
-                //или верхняя сторона и нижняя; эти ситуации нужно обрабатывать
-                if (R.left > R.right) //перепутались левая и правая сторона
+                else //если двигаем мышь вне фигуры
                 {
-                    UltimateROIEditor.Math.UltimateMath.Swap(ref R.left, ref R.right);
-                    SwtichNodeLeftAndRight(ref nodeSelected);
-                    IsInvertedX = !IsInvertedX;
-                }
-                if (R.top > R.bottom) //перепутались верхняя и нижняя сторона
-                {
-                    UltimateROIEditor.Math.UltimateMath.Swap(ref R.top, ref R.bottom);
-                    SwtichNodeTopAndBottom(ref nodeSelected);
-                    IsInvertedY = !IsInvertedY;
+                    isMouseHover = false;
                 }
 
-                rect = R.ToRectangle();  //преобразуем прямоугольник обратно
-                RecalcNodes();   //пересчет узлов
-                mPictureBox.Invalidate();  //перерисовка
-            }  
+                //если никакой из узлов не захвачен и фигура готова к движению
+                if (nodeSelected == PosSizableRect.None && IsReadyToMove == true)
+                {
+                    //двигаем весь прямоугольник, не меняя форму
+                    if (isMoved == false)
+                    {
+                        isMoved = true;
+                        OnMoveEnter();
+                    }
+                    OnMoveHover();
+
+                    int dx = e.X - oldX;
+                    int dy = e.Y - oldY;
+                    rect.X += dx;
+                    rect.Y += dy;
+                    RecalcParams();
+                    //RecalcNodes();
+                    mPictureBox.Invalidate();
+                    oldX = e.X;
+                    oldY = e.Y;
+                    //return;
+                }
+                if (nodeSelected != PosSizableRect.None) //если какой-то из узлов захвачен
+                {
+                    Point p = new Point(e.X, e.Y);
+                    WinRECT R = new WinRECT(rect);
+
+                    //меняем параметры ректа в зависимости от того, какой угол захвачен
+                    StretchRectAccordingNewNodePosition(nodeSelected, ref R, p);
+
+                    //при перемещении узлов могут поменяться местами левая сторона и правая
+                    //или верхняя сторона и нижняя; эти ситуации нужно обрабатывать
+                    if (R.left > R.right) //перепутались левая и правая сторона
+                    {
+                        UltimateROIEditor.Math.UltimateMath.Swap(ref R.left, ref R.right);
+                        SwtichNodeLeftAndRight(ref nodeSelected);
+                        IsInvertedX = !IsInvertedX;
+                    }
+                    if (R.top > R.bottom) //перепутались верхняя и нижняя сторона
+                    {
+                        UltimateROIEditor.Math.UltimateMath.Swap(ref R.top, ref R.bottom);
+                        SwtichNodeTopAndBottom(ref nodeSelected);
+                        IsInvertedY = !IsInvertedY;
+                    }
+
+                    rect = R.ToRectangle();  //преобразуем прямоугольник обратно
+                    RecalcNodes();   //пересчет узлов
+                    mPictureBox.Invalidate();  //перерисовка
+                }
+            }
+            catch (System.NullReferenceException ex)
+            {
+                MessageBox.Show("mPictureBox_MouseMove", "exception");
+                //Debug.WriteLine("");
+            }
         }
 
         public void StretchRectAccordingNewNodePosition(PosSizableRect nodeSelected, ref WinRECT R, Point p)

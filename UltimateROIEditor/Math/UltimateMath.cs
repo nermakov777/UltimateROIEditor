@@ -57,6 +57,7 @@ namespace UltimateROIEditor.Math
             return System.Math.Max(a, c) <= System.Math.Min(b, d);
         }
  
+        //пересечение двух отрезков
         public static bool IntersectTwoLines (Vector2 a, Vector2 b, Vector2 c, Vector2 d) 
         {
 	        float A1 = a.y-b.y,  B1 = b.x-a.x,  C1 = -A1*a.x - B1*a.y;
@@ -135,6 +136,67 @@ namespace UltimateROIEditor.Math
                     ++count;
             }
             return count;
+        }
+
+        //ортогональность двух векторов
+        public static bool IsOrtho(Vector2 a, Vector2 b)
+        {
+            return (Vector2.Dot(a, b) == 0);
+        }
+
+        //получить единичный вектор, перпендикулярный к данному
+        public static Vector2 GetNormalVector(Vector2 a) 
+        {
+            Vector2 N = new Vector2();
+            float x = N.x;
+            float y = N.y;
+            if (x == 0) //вектор вертикальный
+            {
+                N = Vector2.left;
+            }
+            else if (y == 0) //вектор горизонтальный
+            {
+                N = Vector2.up;
+            }
+            else //общий случай
+            {
+                float k = y / x;
+                N = new Vector2(1.0f, -1/k);
+                N.Normalize();
+            }
+            return N;
+        }
+
+        //получить направляющий вектор прямой
+        public static Vector2 GetDirectionVector(Point A, Point B)
+        {
+            Vector2 D = new Vector2();
+            float dx1 = B.X - A.X;
+            float dy1 = B.Y - A.Y;
+            if (dy1 == 0) //горизонтальная прямая
+            {
+                D = Vector2.left;
+            }
+            else if (dx1 == 0) //вертикальная прямая 
+            {
+                D = Vector2.up;
+            }
+            else //не горизонтальная и не вертикальная
+            {
+                float k = dy1 / dx1;
+                D = new Vector2(1.0f, k);
+                D.Normalize();
+            }
+            return D;
+        }
+
+        public static float DistanceFromPointToLine(Point p, Point A, Point B)
+        {
+            float dx1 = B.X - A.X;
+            float dy1 = B.Y - A.Y;
+            Vector2 L = GetDirectionVector(A, B); //направляющий вектор прямой
+            Vector2 N = GetNormalVector(L); //нормаль к прямой
+            return 0;        
         }
     }
 }
