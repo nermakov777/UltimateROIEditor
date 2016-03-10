@@ -95,6 +95,7 @@
   <ItemGroup>
     <Compile Include="Math\ULine.cs" />
     <Compile Include="Math\Vector2.cs" />
+    <Compile Include="Shapes\ShapeCreator.cs" />
     <Compile Include="Shapes\UltimateCircle.cs" />
     <Compile Include="Shapes\UltimateShape.cs" />
     <Compile Include="Shapes\UltimateGoodPolygon.cs" />

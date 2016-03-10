@@ -66,6 +66,10 @@ namespace UltimateROIEditor
             InitializeComponent();
         }
 
+        public int mode = 0;
+
+        ShapeCreator Creator = new ShapeCreator();
+
         List<UltimateShape> figures = new List<UltimateShape>();
 
         public List<UltimateSet> SetList = new List<UltimateSet>();
@@ -358,6 +362,7 @@ namespace UltimateROIEditor
 
         private void pictureBoxMain_MouseDown(object sender, MouseEventArgs e)
         {
+            /*
             //обрабатываем сообщения только от контейнера с изображением
             //PictureBox pic = (PictureBox)sender;
             //if (pic != pictureBox) return;
@@ -370,7 +375,7 @@ namespace UltimateROIEditor
 
             if (e.Button == System.Windows.Forms.MouseButtons.Left)
             {
-                /*CalcRatio();
+                //CalcRatio();
                 
                 //PointF center = new PointF(pictureBox.Width/2, pictureBox.Height/2);
                 PointF center = new PointF(0, 0);
@@ -378,13 +383,13 @@ namespace UltimateROIEditor
                 PointF dst = CvtCoord_WindowToImage(src, center, ratio, image.Size, pictureBox.Size);
 
                 //Points.Add(new Point(e.X, e.Y));
-                Points.Add(new Point((int)dst.X, (int)dst.Y));
-                pictureBox.Refresh();*/
+                //Points.Add(new Point((int)dst.X, (int)dst.Y));
+                //pictureBox.Refresh();
 
                 if (mouseMode == MouseMode.RectAdd)
                 {
                     Rectangle coords = new Rectangle((int)q.X, (int)q.Y, 1, 1);
-                    UltimateRect ulr = new UltimateRect(/*Rects.Count,*/ coords);
+                    UltimateRect ulr = new UltimateRect(coords);
                     figures.Add(ulr);
 
                     //сразу же запускаем редактирование этого прямоугольника
@@ -402,15 +407,22 @@ namespace UltimateROIEditor
                         IndexOfCapturedRect = -1;
                     }
                 }
+
             }
             else if (e.Button == System.Windows.Forms.MouseButtons.Right)
             {
                 //Points.Clear();
-                /*Rects.Clear();
-                mouseMode = MouseMode.None;
-                IndexOfCapturedRect = -1;
-                pictureBox.Refresh();*/
-            }  
+                //Rects.Clear();
+                //mouseMode = MouseMode.None;
+                //IndexOfCapturedRect = -1;
+                //pictureBox.Refresh();
+            }  */
+
+            if (mode == 1)
+            {
+                mode = 0;
+                Creator.CreateInThisPoint(e.X, e.Y, pictureBox, figures);
+            }
         }
         //=============================================================================
         // Из координат окна в реальные координаты изображения
@@ -1051,11 +1063,6 @@ namespace UltimateROIEditor
             LoadSet(SetComboBox.SelectedIndex);
         }
 
-        private void button8_Click(object sender, EventArgs e)
-        {
-            
-        }
-
         private void button9_Click(object sender, EventArgs e)
         {
             foreach (UltimateShape figure in figures)
@@ -1125,11 +1132,14 @@ namespace UltimateROIEditor
 
         private void btnAddRectangle_Click(object sender, EventArgs e)
         {
-            //UltimateRect urect = new UltimateRect(new Rectangle(0, 0, 100, 100));
-            UltimateRectangle urect = new UltimateRectangle(new Rectangle(100, 100, 200, 200));
+            mode = 1;
+
+            /*UltimateRectangle urect = new UltimateRectangle(new Rectangle(100, 100, 200, 200));
             urect.SetPictureBox(pictureBox);
             figures.Add(urect);
-            pictureBox.Invalidate();
+            pictureBox.Invalidate();*/
+
+            
         }
 
         private void btnAddEllipse_Click(object sender, EventArgs e)

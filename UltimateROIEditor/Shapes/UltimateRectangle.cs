@@ -22,7 +22,7 @@ namespace UltimateROIEditor.Shapes
         protected MouseEventHandler h1 = null, h2 = null, h3 = null;
         protected PaintEventHandler h4 = null;
 
-        protected PosSizableRect nodeSelected = PosSizableRect.None;
+        public PosSizableRect nodeSelected = PosSizableRect.None;
 
         public bool IsInvertedX; //при выворачивании наизнанку
         public bool IsInvertedY;  //при выворачивании наизнанку

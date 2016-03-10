@@ -293,48 +293,48 @@
             this.removeToolStripMenuItem3,
             this.removeToolStripMenuItem4});
             this.contextMenuStrip3.Name = "contextMenuStrip3";
-            this.contextMenuStrip3.Size = new System.Drawing.Size(165, 158);
+            this.contextMenuStrip3.Size = new System.Drawing.Size(166, 158);
             // 
             // setIDToolStripMenuItem1
             // 
             this.setIDToolStripMenuItem1.Name = "setIDToolStripMenuItem1";
-            this.setIDToolStripMenuItem1.Size = new System.Drawing.Size(164, 22);
+            this.setIDToolStripMenuItem1.Size = new System.Drawing.Size(165, 22);
             this.setIDToolStripMenuItem1.Text = "Set ID";
             // 
             // fitToBoundingBoxToolStripMenuItem
             // 
             this.fitToBoundingBoxToolStripMenuItem.Name = "fitToBoundingBoxToolStripMenuItem";
-            this.fitToBoundingBoxToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.fitToBoundingBoxToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
             this.fitToBoundingBoxToolStripMenuItem.Text = "Set label";
             // 
             // unfitToolStripMenuItem
             // 
             this.unfitToolStripMenuItem.Name = "unfitToolStripMenuItem";
-            this.unfitToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.unfitToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
             this.unfitToolStripMenuItem.Text = "Fit";
             // 
             // removeToolStripMenuItem1
             // 
             this.removeToolStripMenuItem1.Name = "removeToolStripMenuItem1";
-            this.removeToolStripMenuItem1.Size = new System.Drawing.Size(164, 22);
+            this.removeToolStripMenuItem1.Size = new System.Drawing.Size(165, 22);
             this.removeToolStripMenuItem1.Text = "Unfit";
             // 
             // removeToolStripMenuItem2
             // 
             this.removeToolStripMenuItem2.Name = "removeToolStripMenuItem2";
-            this.removeToolStripMenuItem2.Size = new System.Drawing.Size(164, 22);
+            this.removeToolStripMenuItem2.Size = new System.Drawing.Size(165, 22);
             this.removeToolStripMenuItem2.Text = "To bounding box";
             // 
             // removeToolStripMenuItem3
             // 
             this.removeToolStripMenuItem3.Name = "removeToolStripMenuItem3";
-            this.removeToolStripMenuItem3.Size = new System.Drawing.Size(164, 22);
+            this.removeToolStripMenuItem3.Size = new System.Drawing.Size(165, 22);
             this.removeToolStripMenuItem3.Text = "Add vertex";
             // 
             // removeToolStripMenuItem4
             // 
             this.removeToolStripMenuItem4.Name = "removeToolStripMenuItem4";
-            this.removeToolStripMenuItem4.Size = new System.Drawing.Size(164, 22);
+            this.removeToolStripMenuItem4.Size = new System.Drawing.Size(165, 22);
             this.removeToolStripMenuItem4.Text = "Remove";
             // 
             // contextMenuStrip4
@@ -596,7 +596,7 @@
             this.Name = "Form1";
             this.Text = "Ultimate ROI Editor - редактор зон на изображении (v 1.1)";
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.Shown += new System.EventHandler(this.Form1_Shown);
+            this.Shown += new System.EventHandler(this.btnOpenZones_Click);
             this.Click += new System.EventHandler(this.Form1_Click);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseClick);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
